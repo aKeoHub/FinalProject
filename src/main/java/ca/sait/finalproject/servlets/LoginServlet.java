@@ -47,6 +47,8 @@ public class LoginServlet extends HttpServlet {
 
         if (user.getRole().getRoleId() == 1) {
             response.sendRedirect("admin");
+        } else if (!user.isActive()) {
+            response.sendRedirect("login");
         } else {
             response.sendRedirect("user");
         }
