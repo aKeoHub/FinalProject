@@ -1,10 +1,11 @@
-
 package ca.sait.finalproject.servlets;
 
 import ca.sait.finalproject.models.Role;
+import ca.sait.finalproject.models.User;
 import ca.sait.finalproject.services.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Kingston
  */
-public class RegisterServlet extends HttpServlet {
+public class UserServlet extends HttpServlet {
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -29,7 +30,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
     }
 
     /**
@@ -43,11 +44,10 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                String action = request.getParameter("action");
-        UserService service = new UserService();
-       
 
-        if (action != null && action.equals("add")) {
+        String action = request.getParameter("action");
+        UserService service = new UserService();
+        if (action != null && action.equals("edit")) {
             try {
                 String firstName = request.getParameter("first");
                 String lastName = request.getParameter("last");
@@ -55,37 +55,16 @@ public class RegisterServlet extends HttpServlet {
                 String password = request.getParameter("password");
                 String role = "Regular User";
 
-
                 Role newRole = new Role(2, role);
-                service.insert(email, true, firstName, lastName, password, newRole);
+                service.update(email, true, firstName, lastName, password, newRole);
+                getServletContext().getRequestDispatcher("/WEB-INF/edit.jsp").forward(request, response);
             } catch (Exception ex) {
-                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println(ex);
             }
-
         }
         
-        
-        getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/edit.jsp").forward(request, response);
+
     }
-    
-        private int checkRole(String role) {
-        int roleId;
-
-        switch (role) {
-            case "1":
-                roleId = 1;
-                break;
-            case "2":
-                roleId = 2;
-                break;
-            default:
-                roleId = 3;
-                break;
-        }
-        return roleId;
-    }
-
-
-
 }

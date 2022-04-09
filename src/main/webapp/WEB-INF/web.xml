@@ -40,6 +40,14 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>ca.sait.finalproject.servlets.RegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>ca.sait.finalproject.servlets.UserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountServlet</servlet-name>
+        <servlet-class>ca.sait.finalproject.servlets.AccountServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NoteServlet</servlet-name>
         <url-pattern>/notes</url-pattern>
@@ -59,6 +67,14 @@
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountServlet</servlet-name>
+        <url-pattern>/account</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

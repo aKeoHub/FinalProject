@@ -1,6 +1,6 @@
 <%-- 
-    Document   : register
-    Created on : 8-Apr-2022, 9:08:34 PM
+    Document   : edit
+    Created on : 8-Apr-2022, 10:58:34 PM
     Author     : Kingston
 --%>
 
@@ -9,13 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Register</title>
+        <title>Edit Account information</title>
     </head>
     <body>
-        <h1>Register</h1>
+        <h1>Edit your information</h1>
                         
-                <form action="register" method="post">
-                    <input type="hidden" name="action" value="add">
+                <form action="user" method="post">
+                    <input type="hidden" name="action" value="edit">
 
                     <label for="email">E-mail</label>
                     <input type="text" name="email" id="email">
@@ -30,8 +30,8 @@
                     <input type="text" name="password" id="password">
                     <br>
 
-                    <button type="submit">Register</button>
+                    <button type="submit">Save</button>
                 </form>
-        <a href="login">Login</a>
+        <a href="login">Logout</a>
     </body>
 </html>

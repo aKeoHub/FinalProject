@@ -3,13 +3,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Admin Page</title>
+        <title>HOME nVentory</title>
     </head>
     <body>
-        <h1>Welcome ${email}</h1>
-        <h2>Admin Functionality...</h2>
-        <p>
+        <h1>Hello ${email}</h1>
+                <p>
             <a href="login">Log out</a>
+        </p>
+                        <p>
+            <a href="account">Edit Account</a>
         </p>
     </body>
 </html>
