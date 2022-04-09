@@ -1,7 +1,7 @@
-package ca.sait.securitydemo12.servlets;
+package ca.sait.finalproject.servlets;
 
-import ca.sait.securitydemo12.models.User;
-import ca.sait.securitydemo12.services.*;
+import ca.sait.finalproject.services.AccountService;
+import ca.sait.finalproject.models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

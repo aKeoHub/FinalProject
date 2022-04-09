@@ -1,10 +1,10 @@
-package ca.sait.securitydemo12.services;
+package ca.sait.finalproject.services;
 
-import ca.sait.securitydemo12.dataaccess.NoteDB;
-import ca.sait.securitydemo12.dataaccess.UserDB;
+import ca.sait.finalproject.dataaccess.NoteDB;
+import ca.sait.finalproject.dataaccess.UserDB;
 import java.util.List;
-import ca.sait.securitydemo12.models.Note;
-import ca.sait.securitydemo12.models.User;
+import ca.sait.finalproject.models.Note;
+import ca.sait.finalproject.models.User;
 
 public class NoteService {
     public Note get(int id) throws Exception {

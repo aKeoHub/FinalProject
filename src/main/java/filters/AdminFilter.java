@@ -1,6 +1,6 @@
 package filters;
 
-import ca.sait.securitydemo12.models.User;
+import ca.sait.finalproject.models.User;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;

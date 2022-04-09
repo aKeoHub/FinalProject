@@ -22,23 +22,23 @@
     </filter-mapping>
     <servlet>
         <servlet-name>NoteServlet</servlet-name>
-        <servlet-class>ca.sait.securitydemo12.servlets.NoteServlet</servlet-class>
+        <servlet-class>ca.sait.finalproject.servlets.NoteServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>ca.sait.securitydemo12.servlets.LoginServlet</servlet-class>
+        <servlet-class>ca.sait.finalproject.servlets.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminServlet</servlet-name>
-        <servlet-class>ca.sait.securitydemo12.servlets.AdminServlet</servlet-class>
+        <servlet-class>ca.sait.finalproject.servlets.AdminServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ForgotPasswordServlet</servlet-name>
-        <servlet-class>ca.sait.securitydemo12.servlets.ForgotPasswordServlet</servlet-class>
+        <servlet-class>ca.sait.finalproject.servlets.ForgotPasswordServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>ca.sait.securitydemo12.servlets.RegisterServlet</servlet-class>
+        <servlet-class>ca.sait.finalproject.servlets.RegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>NoteServlet</servlet-name>

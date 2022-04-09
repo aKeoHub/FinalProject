@@ -14,7 +14,7 @@
     <body>
         <h1>Register</h1>
                         <h2>Add user</h2>
-                <form action="user" method="post">
+                <form action="register" method="post">
                     <input type="hidden" name="action" value="add">
 
                     <label for="email">E-mail</label>

@@ -1,4 +1,4 @@
-package ca.sait.securitydemo12.models;
+package ca.sait.finalproject.models;
 
 import java.io.Serializable;
 import java.util.List;

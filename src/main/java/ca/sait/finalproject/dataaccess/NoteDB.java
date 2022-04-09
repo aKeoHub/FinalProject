@@ -1,10 +1,10 @@
-package ca.sait.securitydemo12.dataaccess;
+package ca.sait.finalproject.dataaccess;
 
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import ca.sait.securitydemo12.models.Note;
-import ca.sait.securitydemo12.models.User;
+import ca.sait.finalproject.models.Note;
+import ca.sait.finalproject.models.User;
 
 public class NoteDB {
 

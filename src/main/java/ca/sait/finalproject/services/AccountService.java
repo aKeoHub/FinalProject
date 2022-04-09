@@ -1,7 +1,7 @@
-package ca.sait.securitydemo12.services;
+package ca.sait.finalproject.services;
 
-import ca.sait.securitydemo12.dataaccess.UserDB;
-import ca.sait.securitydemo12.models.User;
+import ca.sait.finalproject.dataaccess.UserDB;
+import ca.sait.finalproject.models.User;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;

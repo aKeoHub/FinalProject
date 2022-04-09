@@ -1,4 +1,4 @@
-package ca.sait.securitydemo12.servlets;
+package ca.sait.finalproject.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

@@ -1,4 +1,4 @@
-package ca.sait.securitydemo12.servlets;
+package ca.sait.finalproject.servlets;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import ca.sait.securitydemo12.models.Note;
-import ca.sait.securitydemo12.services.NoteService;
+import ca.sait.finalproject.models.Note;
+import ca.sait.finalproject.services.NoteService;
 
 public class NoteServlet extends HttpServlet {
 
