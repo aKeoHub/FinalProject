@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Edit your information</h1>
-                        
+                        <c:forEach var="user" items="${users}">
                 <form action="user" method="post">
                     <input type="hidden" name="action" value="edit">
 
@@ -32,6 +32,12 @@
 
                     <button type="submit">Save</button>
                 </form>
+                <form action="user" method="post">
+            <input type="hidden" name="action" value="delete" />
+            <input type="submit" value="DEACTIVATE">
+            <input type="hidden" name="email" value="${user.email}">
+        </form>
+        </c:forEach>
         <a href="login">Logout</a>
     </body>
 </html>

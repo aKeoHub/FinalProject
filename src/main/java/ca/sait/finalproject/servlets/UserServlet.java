@@ -57,14 +57,23 @@ public class UserServlet extends HttpServlet {
 
                 Role newRole = new Role(2, role);
                 service.update(email, true, firstName, lastName, password, newRole);
-                getServletContext().getRequestDispatcher("/WEB-INF/edit.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);
+            }
+        } else if (action != null && action.equals("delete")) {
+
+            try {
+                String email = request.getParameter("email");
+                service.delete(email);
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println(ex);
             }
         }
         
-        getServletContext().getRequestDispatcher("/WEB-INF/edit.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);
 
     }
 }
