@@ -17,7 +17,7 @@ public class UserDB {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String sql = "SELECT * FROM USER INNER JOIN role ON role_id = user.role WHERE ACTIVE = 1";
+        String sql = "SELECT * FROM USER INNER JOIN role ON role_id = user.role";
 
         try {
             ps = con.prepareStatement(sql);
@@ -147,6 +147,26 @@ public class UserDB {
         }
 
         return deleted;
+    }
+    
+    public boolean activate(User user) throws Exception {
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection();
+        PreparedStatement ps = null;
+        String sql = "Update user SET active = 1 WHERE email = ?";
+
+        boolean activated;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, user.getEmail());
+            activated = ps.executeUpdate() != 0;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            cp.freeConnection(con);
+        }
+
+        return activated;
     }
 
 }

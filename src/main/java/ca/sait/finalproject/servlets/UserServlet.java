@@ -72,7 +72,16 @@ public class UserServlet extends HttpServlet {
                 System.out.println(ex);
             }
         }
-        
+                UserService userService = new UserService();
+        try {
+            List<User> users = userService.getAll();
+
+            request.setAttribute("users", users);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
         getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);
 
     }

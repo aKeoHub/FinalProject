@@ -36,4 +36,10 @@ public class UserService {
         user.setEmail(email);
         return this.userDB.delete(user);
     }
+    
+    public boolean activate(String email) throws Exception {
+        User user = new User();
+        user.setEmail(email);
+        return this.userDB.activate(user);
+    }
 }
