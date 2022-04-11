@@ -48,6 +48,10 @@
         <servlet-name>AccountServlet</servlet-name>
         <servlet-class>ca.sait.finalproject.servlets.AccountServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShoppingListServlet</servlet-name>
+        <servlet-class>ca.sait.finalproject.servlets.ShoppingListServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NoteServlet</servlet-name>
         <url-pattern>/notes</url-pattern>
@@ -75,6 +79,10 @@
     <servlet-mapping>
         <servlet-name>AccountServlet</servlet-name>
         <url-pattern>/account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShoppingListServlet</servlet-name>
+        <url-pattern>/shoppinglist</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

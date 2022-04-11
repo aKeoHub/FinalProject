@@ -1,10 +1,13 @@
 package ca.sait.finalproject.servlets;
 
+import ca.sait.finalproject.models.Item;
 import ca.sait.finalproject.models.Role;
 import ca.sait.finalproject.models.User;
+import ca.sait.finalproject.services.ItemService;
 import ca.sait.finalproject.services.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,6 +34,20 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ItemService itemService = new ItemService();
+        HttpSession session = request.getSession();
+
+        //String email = (String) session.getAttribute("email");
+        try {
+            String email = (String) session.getAttribute("email");
+            List<Item> items = itemService.getAll(email);
+
+            request.setAttribute("items", items);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
     }
 
@@ -47,42 +65,37 @@ public class UserServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         UserService service = new UserService();
-        if (action != null && action.equals("edit")) {
-            try {
-                String firstName = request.getParameter("first");
-                String lastName = request.getParameter("last");
-                String email = request.getParameter("email");
-                String password = request.getParameter("password");
-                String role = "Regular User";
-
-                Role newRole = new Role(2, role);
-                service.update(email, true, firstName, lastName, password, newRole);
-                getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);
-            } catch (Exception ex) {
-                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println(ex);
-            }
-        } else if (action != null && action.equals("delete")) {
-
-            try {
-                String email = request.getParameter("email");
-                service.delete(email);
-            } catch (Exception ex) {
-                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println(ex);
-            }
-        }
-                UserService userService = new UserService();
+        HttpSession session = request.getSession();
+        ItemService itemService = new ItemService();
+        String email = (String) session.getAttribute("email");
         try {
-            List<User> users = userService.getAll();
+            List<Item> items = itemService.getAll(email);
 
-            request.setAttribute("users", users);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);
+            request.setAttribute("items", items);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
-        getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);
+
+//        if (action != null && action.equals("add")) {
+//            String item = request.getParameter("item");
+//            ArrayList<String> items = (ArrayList<String>) session.getAttribute("items");
+//            items.add(item);
+//            session.setAttribute("items", items);
+//        } else if (action != null && action.equals("delete")) {
+//            String item = request.getParameter("item");
+//            ArrayList<String> items = (ArrayList<String>) session.getAttribute("items");
+//            items.remove(item);
+//            session.setAttribute("items", items);
+//        } else {
+//
+//            
+//            ArrayList<String> items = new ArrayList<>();
+//           
+//            session.setAttribute("items", items);
+//        }
+        getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
 
     }
 }

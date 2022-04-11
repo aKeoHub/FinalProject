@@ -13,31 +13,33 @@
     </head>
     <body>
         <h1>Edit your information</h1>
-                        <c:forEach var="user" items="${users}">
-                <form action="user" method="post">
-                    <input type="hidden" name="action" value="edit">
+    <c:forEach var="user" items="${users}">
+        <form action="account" method="post">
+            <input type="hidden" name="action" value="edit">
 
-                    <label for="email">E-mail</label>
-                    <input type="text" name="email" id="email">
-                    <br>
-                    <label for="first">First Name</label>
-                    <input type="text" name="first" id="first">
-                    <br>
-                    <label for="last">Last Name</label>
-                    <input type="text" name="last" id="last">
-                    <br>
-                    <label for="password">Password</label>
-                    <input type="text" name="password" id="password">
-                    <br>
+            <label for="email">E-mail</label>
+            <input type="text" name="email" id="email">
+            <br>
+            <label for="first">First Name</label>
+            <input type="text" name="first" id="first">
+            <br>
+            <label for="last">Last Name</label>
+            <input type="text" name="last" id="last">
+            <br>
+            <label for="password">Password</label>
+            <input type="text" name="password" id="password">
+            <br>
 
-                    <button type="submit">Save</button>
-                </form>
-                <form action="user" method="post">
+            <button type="submit">Save</button>
+        </form>
+        
+        <form action="account" method="post">
             <input type="hidden" name="action" value="delete" />
             <input type="submit" value="DEACTIVATE">
             <input type="hidden" name="email" value="${user.email}">
         </form>
-        </c:forEach>
-        <a href="login">Logout</a>
-    </body>
+        
+    </c:forEach>
+    <a href="login">Logout</a>
+</body>
 </html>
