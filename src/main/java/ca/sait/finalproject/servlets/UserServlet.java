@@ -100,7 +100,11 @@ public class UserServlet extends HttpServlet {
                 String idParam = request.getParameter("id");
                 int id = Integer.parseInt(idParam);
                 String category = request.getParameter("category");
+                
                 int categoryNum = Integer.parseInt(category);
+                String test = "TEST";
+                request.setAttribute("test", test);
+                
                 String name = request.getParameter("name");
                 String priceIn = request.getParameter("price");
                 double price = Double.parseDouble(priceIn);

@@ -36,12 +36,7 @@
                                 <button type="submit">delete</button>
                             </form>
 
-                            <form action ="user" method="post">
-                                <input type="hidden" name="action" value="edit">
-                                <input type="hidden" name="email" value="${item.email}">
-                                <button type="submit">edit</button>
-                            </form>
-                        </td>
+
                     </tr>
                 </c:forEach>
             </tbody>
@@ -73,11 +68,11 @@
 
             <button type="submit">Add</button>
         </form>
-        
+
         <br>
-           
-        
-              <form action="user" method="post">
+
+
+        <form action="user" method="post">
             <input type="hidden" name="action" value="edit">
 
             <label for="id">ID</label>

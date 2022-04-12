@@ -46,6 +46,57 @@
                     </tr>
                 </c:forEach>
             </tbody>
+                 <h2>Add user</h2>
+                <form action="admin" method="post">
+                    <input type="hidden" name="action" value="add">
+
+                    <label for="email">E-mail</label>
+                    <input type="text" name="email" id="email">
+                    <br>
+                    <label for="first">First Name</label>
+                    <input type="text" name="first" id="first">
+                    <br>
+                    <label for="last">Last Name</label>
+                    <input type="text" name="last" id="last">
+                    <br>
+                    <label for="password">Password</label>
+                    <input type="text" name="password" id="password">
+                    <br>
+                    <label for="role">Role</label>
+                    <select name="role" id="role">
+                        <option value="1">System Admin</option>
+                        <option value="2">Regular User</option>
+                        <option value="3">Company Admin</option>
+                    </select>
+
+                    <button type="submit">Add</button>
+                </form>
+
+                <h2> Edit user </h2>
+                <form action="admin" method="post">
+                    <input type="hidden" name="action" value="edit">
+
+                    <label for="email">E-mail</label>
+                    <input type="text" name="email" id="email">
+                    <br>
+                    <label for="first">First Name</label>
+                    <input type="text" name="first" id="first">
+                    <br>
+                    <label for="last">Last Name</label>
+                    <input type="text" name="last" id="last">
+                    <br>
+                    <label for="password">Password</label>
+                    <input type="text" name="password" id="password">
+                    <br>
+                    <label for="role">Role</label>
+                    <select name="role" id="role">
+                        <option value="1">System Admin</option>
+                        <option value="2">Regular User</option>
+                        <option value="3">Company Admin</option>
+                    </select>
+
+                    <button type="submit">Edit</button>
+                </form>
             <p>
                 <a href="login">Log out</a>
             </p>
