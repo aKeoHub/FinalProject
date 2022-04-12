@@ -26,22 +26,28 @@ public class ItemService {
         return items;
     }
     
-    public boolean insert(int id, String category, String name, double price, String email) throws Exception {
-        Item item = new Item(id, category, name, price, email);
+//    public boolean insert(int id, int category, String name, double price, String email) throws Exception {
+//        Item item = new Item(id, category, name, price, email);
+//       return this.itemDB.insert(item);
+//    }
+        public boolean insert(int category, String name, double price, String email) throws Exception {
+        Item item = new Item(category, name, price, email);
        return this.itemDB.insert(item);
     }
     
-    public boolean update(int id, String category, String name, double price, String email) throws Exception {
+    public boolean update(int id, int category, String name, double price, String email) throws Exception {
         Item item = new Item(id, category, name, price, email);
         return this.itemDB.update(item);
     }
     
-    public boolean delete(String email) throws Exception {
+    public boolean delete(int id) throws Exception {
         
         Item item = new Item();
-        item.setEmail(email);
+        item.setId(id);
         return this.itemDB.delete(item);
     }
+
+
     
 
 }

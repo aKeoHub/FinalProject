@@ -8,67 +8,74 @@
     </head>
     <body>
         <h1>Hello ${email}</h1>          
-        <h1>Shopping List</h1>
+        <h1>Home nVentory List</h1>
 
         <table class="table">
             <thead>
                 <tr>
-                    <th>Email</th> 
+                    <th>ID</th> 
                     <th>Category</th>
                     <th>Name</th>
-                    <th>Price</th>   
+                    <th>Price</th>  
+                    <th>Owner</th> 
                 </tr>
             </thead>
             <tbody>
                 <c:forEach var="item" items="${items}">
                     <tr>
 
-                        <td>${item.email}</td>
+                        <td>${item.id}</td>
                         <td>${item.category}</td>
                         <td>${item.name}</td>
                         <td>${item.price}</td>
+                        <td>${item.email}</td>
                         <td>
                             <form action ="user" method="post">
                                 <input type="hidden" name="action" value="delete">
-                                <input type="hidden" name="email" value="${item.email}">
+                                <input type="hidden" name="id" value="${item.id}">
                                 <button type="submit">delete</button>
                             </form>
 
-                            <form action ="user" method="post">
-                                <input type="hidden" name="action" value="activation">
-                                <input type="hidden" name="email" value="${item.email}">
-                                <button type="submit">REACTIVATE</button>
-                            </form>
+                            <!--                            <form action ="user" method="post">
+                                                            <input type="hidden" name="action" value="activation">
+                                                            <input type="hidden" name="email" value="${item.email}">
+                                                            <button type="submit">REACTIVATE</button>
+                                                        </form>-->
                         </td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
 
+        <form action="user" method="post">
+            <input type="hidden" name="action" value="add">
 
-        <!--        <form action="user" method="post">
-                    <input type="hidden" name="action" value="add">
-        
-                    
-                    <label for="item">Item</label>
-                    <input type="text" name="item" id="item">
-                    
-        
-                    <button type="submit">Add</button>
-                </form>-->
+            <label for="category">Category</label>
+            <select name="category" id="category">
+                <option value=1>Kitchen</option>
+                <option value="2">Bathroom</option>
+                <option value="3">Living Room</option>
+                <option value="4">Basement</option>
+                <option value="5">Bedroom</option>
+                <option value="6">Garage</option>
+                <option value="7">Office</option>
+                <option value="8">Utility Room</option>
+                <option value="9">Storage</option>
+                <option value="10">Other</option>
+            </select>
+            <br>
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name">
+            <br>
+            <label for="price">Price</label>
+            <input type="number" name="price" id="price">
+            <br>
+
+            <button type="submit">Add</button>
+        </form>
 
 
-<!--        <form action="user" method="post">
-            <input type="hidden" name="action" value="delete">
-            <c:forEach items="${items}" var="item">
-                <p>
-                    <input type="radio" name="item" value="${item}">
-                    ${item}
-                </p>
-            </c:forEach>
 
-            <button type="submit">Delete</button>
-        </form>-->
 
 
 
@@ -79,9 +86,7 @@
 
 
 
-        <p>
-            <a href="shoppinglist">View your shopping list</a>
-        </p>
+
         <p>
             <a href="account">Edit Account</a>
         </p>

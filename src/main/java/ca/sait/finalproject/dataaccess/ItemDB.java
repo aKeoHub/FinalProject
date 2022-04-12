@@ -31,7 +31,7 @@ public class ItemDB {
 
             while (rs.next()) {
                 int id = rs.getInt(1);
-                String category = rs.getString(2);
+                int category = rs.getInt(2);
                 String name = rs.getString(3);
                 double price = rs.getDouble(4);
                 String owner = rs.getString(5);
@@ -63,8 +63,8 @@ public class ItemDB {
             ps.setString(1, email);
             rs = ps.executeQuery();
             if (rs.next()) {
-                           int id = rs.getInt(1);
-                String category = rs.getString(2);
+                int id = rs.getInt(1);
+                int category = rs.getInt(2);
                 String name = rs.getString(3);
                 double price = rs.getDouble(4);
                 String owner = rs.getString(5);
@@ -86,17 +86,18 @@ public class ItemDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "INSERT INTO item(`id`, `category`, `name`, `price`, `email`) VALUES (?, ?, ?, ?, ?)";
+        //String sql = "INSERT INTO item(`item_id`, `category`, `item_name`, `price`, `owner`) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO item(`category`, `item_name`, `price`, `owner`) VALUES (?, ?, ?, ?)";
+       // String itemId = "item.item_id = item.item_id + 1";
 
         boolean inserted = false;
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, item.getId());
-            ps.setString(2, item.getCategory());
-            ps.setString(3, item.getName());
-            ps.setDouble(4, item.getPrice());
-            ps.setString(5, item.getEmail());
+            ps.setInt(1, item.getCategory());
+            ps.setString(2, item.getName());
+            ps.setDouble(3, item.getPrice());
+            ps.setString(4, item.getEmail());
 
             inserted = ps.executeUpdate() != 0 ? true : false;
 
@@ -117,7 +118,7 @@ public class ItemDB {
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, item.getId());
-            ps.setString(2, item.getCategory());
+            ps.setInt(2, item.getCategory());
             ps.setString(3, item.getName());
             ps.setDouble(4, item.getPrice());
             ps.setString(5, item.getEmail());
@@ -134,14 +135,14 @@ public class ItemDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "DELETE FROM item WHERE item_name = ?";
+        String sql = "DELETE FROM item WHERE item_id = ?";
 
 
         boolean deleted;
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, item.getName());
+            ps.setInt(1, item.getId());
             deleted = ps.executeUpdate() != 0;
         } finally {
             DBUtil.closePreparedStatement(ps);

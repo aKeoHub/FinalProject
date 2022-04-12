@@ -7,7 +7,7 @@ package ca.sait.finalproject.models;
  */
 public class Item {
     private int id;
-    private String category;
+    private int category;
     private String email;
     private String name;
     private double price;  
@@ -15,8 +15,15 @@ public class Item {
     public Item() {
     }
 
-    public Item(int id, String category, String name, double price, String email) {
+    public Item(int id, int category, String name, double price, String email) {
         this.id = id;
+        this.category = category;
+        this.email = email;
+        this.name = name;
+        this.price = price;
+    }
+    
+        public Item(int category, String name, double price, String email) {
         this.category = category;
         this.email = email;
         this.name = name;
@@ -31,11 +38,11 @@ public class Item {
         this.id = id;
     }
 
-    public String getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 

@@ -68,7 +68,36 @@ public class UserServlet extends HttpServlet {
         HttpSession session = request.getSession();
         ItemService itemService = new ItemService();
         String email = (String) session.getAttribute("email");
-        try {
+
+
+        if (action != null && action.equals("add")) {
+            try {
+
+                String category = request.getParameter("category");
+                int categoryNum = Integer.parseInt(category);
+                String name = request.getParameter("name");
+                String priceIn = request.getParameter("price");
+                double price = Double.parseDouble(priceIn);
+
+                itemService.insert(categoryNum, name, price, email);
+                // itemService.insert(category, name, price, email);
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);
+            }
+
+        } else if (action != null && action.equals("delete")) {
+            try {
+                String idParam = request.getParameter("id");
+                int id = Integer.parseInt(idParam);
+                itemService.delete(id);
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);
+            }
+        } 
+        
+                try {
             List<Item> items = itemService.getAll(email);
 
             request.setAttribute("items", items);
@@ -78,24 +107,6 @@ public class UserServlet extends HttpServlet {
             System.out.println(ex);
         }
 
-//        if (action != null && action.equals("add")) {
-//            String item = request.getParameter("item");
-//            ArrayList<String> items = (ArrayList<String>) session.getAttribute("items");
-//            items.add(item);
-//            session.setAttribute("items", items);
-//        } else if (action != null && action.equals("delete")) {
-//            String item = request.getParameter("item");
-//            ArrayList<String> items = (ArrayList<String>) session.getAttribute("items");
-//            items.remove(item);
-//            session.setAttribute("items", items);
-//        } else {
-//
-//            
-//            ArrayList<String> items = new ArrayList<>();
-//           
-//            session.setAttribute("items", items);
-//        }
-        getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
-
+       // getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
     }
 }
