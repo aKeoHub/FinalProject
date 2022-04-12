@@ -36,11 +36,11 @@
                                 <button type="submit">delete</button>
                             </form>
 
-                            <!--                            <form action ="user" method="post">
-                                                            <input type="hidden" name="action" value="activation">
-                                                            <input type="hidden" name="email" value="${item.email}">
-                                                            <button type="submit">REACTIVATE</button>
-                                                        </form>-->
+                            <form action ="user" method="post">
+                                <input type="hidden" name="action" value="edit">
+                                <input type="hidden" name="email" value="${item.email}">
+                                <button type="submit">edit</button>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>
@@ -72,6 +72,39 @@
             <br>
 
             <button type="submit">Add</button>
+        </form>
+        
+        <br>
+           
+        
+              <form action="user" method="post">
+            <input type="hidden" name="action" value="edit">
+
+            <label for="id">ID</label>
+            <input type="number" name="id" id="id">
+            <br>
+            <label for="category">Category</label>
+            <select name="category" id="category">
+                <option value=1>Kitchen</option>
+                <option value="2">Bathroom</option>
+                <option value="3">Living Room</option>
+                <option value="4">Basement</option>
+                <option value="5">Bedroom</option>
+                <option value="6">Garage</option>
+                <option value="7">Office</option>
+                <option value="8">Utility Room</option>
+                <option value="9">Storage</option>
+                <option value="10">Other</option>
+            </select>
+            <br>
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name">
+            <br>
+            <label for="price">Price</label>
+            <input type="number" name="price" id="price">
+            <br>
+
+            <button type="submit">Edit</button>
         </form>
 
 

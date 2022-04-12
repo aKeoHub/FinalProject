@@ -113,15 +113,14 @@ public class ItemDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "UPDATE item SET `item_id` = ?, `category` = ?, `name` = ?, `price` = ? WHERE  `email` = ?";
+        String sql = "UPDATE item SET `category` = ?, `item_name` = ?, `price` = ? WHERE `item_id` = ?";
         boolean updated;
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, item.getId());
-            ps.setInt(2, item.getCategory());
-            ps.setString(3, item.getName());
-            ps.setDouble(4, item.getPrice());
-            ps.setString(5, item.getEmail());
+            ps.setInt(1, item.getCategory());
+            ps.setString(2, item.getName());
+            ps.setDouble(3, item.getPrice());
+            ps.setInt(4, item.getId());
             updated = ps.executeUpdate() != 0;
         } finally {
             DBUtil.closePreparedStatement(ps);
