@@ -21,9 +21,9 @@
                         <td>${category.name}</td>
 
                         <td>
-                            <form action ="admin" method="post">
+                            <form action ="category" method="post">
                                 <input type="hidden" name="action" value="delete">
-                                <input type="hidden" name="email" value="${user.email}">
+                                <input type="hidden" name="categoryId" value="${category.id}">
                                 <button type="submit">delete</button>
                             </form>
 
@@ -32,5 +32,36 @@
                     </tr>
                 </c:forEach>
             </tbody>
+            
+                             <h2>Add Category</h2>
+                <form action="category" method="post">
+                    <input type="hidden" name="action" value="add">
+
+                    <label for="id">ID</label>
+                    <input type="number" name="id" id="id">
+                    <br>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name">
+                    <br>
+
+
+                    <button type="submit">Add</button>
+                </form>
+
+                <h2> Edit Category </h2>
+                <form action="category" method="post">
+                    <input type="hidden" name="action" value="edit">
+
+                        <label for="id">ID</label>
+                    <input type="number" name="id" id="id">
+                    <br>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name">
+                    <br>
+
+
+
+                    <button type="submit">Edit</button>
+                </form>
     </body>
 </html>

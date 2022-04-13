@@ -1,4 +1,3 @@
-
 package ca.sait.finalproject.servlets;
 
 import ca.sait.finalproject.models.Category;
@@ -23,7 +22,6 @@ import javax.servlet.http.HttpSession;
  */
 public class CategoryServlet extends HttpServlet {
 
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -36,10 +34,10 @@ public class CategoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-              CategoryService catService = new CategoryService(); 
+        CategoryService catService = new CategoryService();
         HttpSession session = request.getSession();
         ItemService itemService = new ItemService();
-        
+
         String email = (String) session.getAttribute("email");
 
         try {
@@ -65,13 +63,12 @@ public class CategoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-                String action = request.getParameter("action");
-        UserService service = new UserService();
-        CategoryService catService = new CategoryService(); 
+
+        String action = request.getParameter("action");
+        CategoryService catService = new CategoryService();
         HttpSession session = request.getSession();
-        ItemService itemService = new ItemService();
-        
+
+
         String email = (String) session.getAttribute("email");
 
         try {
@@ -83,35 +80,34 @@ public class CategoryServlet extends HttpServlet {
             Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
-//        if (action != null && action.equals("add")) {
-//            try {
-//
-//                String category = request.getParameter("category");
-//                int categoryNum = Integer.parseInt(category);
-//                String name = request.getParameter("name");
-//                String priceIn = request.getParameter("price");
-//                double price = Double.parseDouble(priceIn);
-//
-//                itemService.insert(categoryNum, name, price, email);
-//                // itemService.insert(category, name, price, email);
-//               // this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
-//            } catch (Exception ex) {
-//                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
-//                System.out.println(ex);
-//            }
-//
-//        } else if (action != null && action.equals("delete")) {
-//            try {
-//                String idParam = request.getParameter("id");
-//                int id = Integer.parseInt(idParam);
-//                itemService.delete(id);
-//                //this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
-//            } catch (Exception ex) {
-//                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
-//                System.out.println(ex);
-//            }
-//        } else if (action != null && action.equals("edit")) {
-//            try {
+        if (action != null && action.equals("add")) {
+            try {
+
+                String name = request.getParameter("name");
+                String idParam = request.getParameter("id");
+                int id = Integer.parseInt(idParam);
+
+
+                catService.insert(id, name);
+                // itemService.insert(category, name, price, email);
+                // this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);
+            }
+
+        } else if (action != null && action.equals("delete")) {
+            try {
+                String idParam = request.getParameter("categoryId");
+                int id = Integer.parseInt(idParam);
+                catService.delete(id);
+                //this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);
+            }
+        } else if (action != null && action.equals("edit")) {
+            try {
 //                String idParam = request.getParameter("id");
 //                int id = Integer.parseInt(idParam);
 //                String category = request.getParameter("category");
@@ -123,14 +119,13 @@ public class CategoryServlet extends HttpServlet {
 //                double price = Double.parseDouble(priceIn);
 //                itemService.update(id, categoryNum, name, price, email);
 //                //this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
-//            } catch (Exception ex) {
-//                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
-//                System.out.println(ex);
-//            }
-//
-//        }
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);
+            }
+
+        }
         this.getServletContext().getRequestDispatcher("/WEB-INF/category.jsp").forward(request, response);
     }
-
 
 }

@@ -6,8 +6,7 @@ package ca.sait.finalproject.services;
 
 import ca.sait.finalproject.dataaccess.CategoryDB;
 import ca.sait.finalproject.models.Category;
-import ca.sait.finalproject.models.Role;
-import ca.sait.finalproject.models.User;
+
 import java.util.List;
 
 /**
@@ -17,9 +16,9 @@ import java.util.List;
 public class CategoryService {
     private CategoryDB categoryDB = new CategoryDB();
     
-        public User get(String email) throws Exception {
-        User user = this.categoryDB.get(email);
-        return user;
+        public Category get(int id) throws Exception {
+        Category category = this.categoryDB.get(id);
+        return category;
     }
     
     public List<Category> getAll() throws Exception {
@@ -27,32 +26,24 @@ public class CategoryService {
         return categories;
     }
     
-    public boolean insert(String email, boolean active, String firstName, String lastName, String password, Role role) throws Exception {
-        User user = new User(email, active, firstName, lastName, password, role);
-       return this.categoryDB.insert(user);
+    public boolean insert(int id, String name) throws Exception {
+        Category category = new Category(id, name);
+       return this.categoryDB.insert(category);
     }
     
-    public boolean update(String email, boolean active, String firstName, String lastName, String password, Role role) throws Exception {
-        User user = new User(email, active, firstName, lastName, password, role);
-        return this.categoryDB.update(user);
+    public boolean update(int id, String name) throws Exception {
+        Category category = new Category(id, name);
+        return this.categoryDB.update(category);
     }
     
-    public boolean delete(String email) throws Exception {
-        
-        User user = new User();
-        user.setEmail(email);
-        return this.categoryDB.delete(user);
+    public boolean delete(int id) throws Exception {
+      
+        Category category = new Category();
+        category.setId(id);
+
+        return this.categoryDB.delete(category);
     }
     
-    public boolean activate(String email) throws Exception {
-        User user = new User();
-        user.setEmail(email);
-        return this.categoryDB.activate(user);
-    }
+
     
-        public boolean deactivate(String email) throws Exception {
-        User user = new User();
-        user.setEmail(email);
-        return this.categoryDB.deactivate(user);
-    }
 }

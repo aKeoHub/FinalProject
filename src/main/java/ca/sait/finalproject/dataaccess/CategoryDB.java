@@ -8,6 +8,9 @@ import ca.sait.finalproject.models.Category;
 import ca.sait.finalproject.models.Item;
 import ca.sait.finalproject.models.Role;
 import ca.sait.finalproject.models.User;
+import ca.sait.finalproject.models.*;
+import ca.sait.finalproject.models.Category;
+import ca.sait.finalproject.models.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,29 +54,24 @@ public class CategoryDB {
         return categories;
     }
 
-    public User get(String email) throws Exception {
-        User user = null;
+    public Category get(int id) throws Exception {
+        Category category = null;
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM USER INNER JOIN role ON role_id = user.role WHERE email = ? LIMIT 1";
+        String sql = "SELECT * FROM CATEGORY WHERE category_id = ? LIMIT 1";
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, email);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                boolean active = rs.getBoolean(2);
-                String firstName = rs.getString(3);
-                String lastName = rs.getString(4);
-                String password = rs.getString(5);
-                int roleId = rs.getInt(6);
-                String roleName = rs.getString(8);
+                int idNum = rs.getInt(1);
+                String name = rs.getString(2);
 
-                Role role = new Role(roleId, roleName);
+                category = new Category(idNum, name);
 
-                user = new User(email, active, firstName, lastName, password, role);
             }
         } finally {
             DBUtil.closeResultSet(rs);
@@ -81,24 +79,21 @@ public class CategoryDB {
             cp.freeConnection(con);
         }
 
-        return user;
+        return category;
     }
 
-    public boolean insert(User user) throws Exception {
+    public boolean insert(Category category) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "INSERT INTO user(`email`, `first_name`, `last_name`, `password`, `role`) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO category(`category_id`, `category_name`) VALUES (?, ?)";
 
         boolean inserted = false;
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, user.getEmail());
-            ps.setString(2, user.getFirstName());
-            ps.setString(3, user.getLastName());
-            ps.setString(4, user.getPassword());
-            ps.setInt(5, user.getRole().getRoleId());
+            ps.setInt(1, category.getId());
+            ps.setString(2, category.getName());
 
             inserted = ps.executeUpdate() != 0 ? true : false;
 
@@ -110,19 +105,17 @@ public class CategoryDB {
         return inserted;
     }
 
-    public boolean update(User user) throws Exception {
+    public boolean update(Category category) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "UPDATE user SET `first_name` = ?, `last_name` = ?, `password` = ?, `role` = ? WHERE  `email` = ?";
+        String sql = "UPDATE category SET `category_id` = ?, `category_name` = ? WHERE `category_id` = ?";
         boolean updated;
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, user.getFirstName());
-            ps.setString(2, user.getLastName());
-            ps.setString(3, user.getPassword());
-            ps.setInt(4, user.getRole().getRoleId());
-            ps.setString(5, user.getEmail());
+            ps.setInt(1, category.getId());
+            ps.setString(2, category.getName());
+            ps.setInt(3, category.getId());
             updated = ps.executeUpdate() != 0;
         } finally {
             DBUtil.closePreparedStatement(ps);
@@ -132,18 +125,18 @@ public class CategoryDB {
         return updated;
     }
 
-    public boolean delete(User user) throws Exception {
+    public boolean delete(Category category) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "DELETE FROM user WHERE email = ?";
+        String sql = "DELETE FROM CATEGORY WHERE category_id = ?";
         //String sql = "Update user SET active = 0 WHERE email = ?";
 
         boolean deleted;
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, user.getEmail());
+            ps.setInt(1, category.getId());
             deleted = ps.executeUpdate() != 0;
         } finally {
             DBUtil.closePreparedStatement(ps);
@@ -153,43 +146,5 @@ public class CategoryDB {
         return deleted;
     }
 
-    public boolean activate(User user) throws Exception {
-        ConnectionPool cp = ConnectionPool.getInstance();
-        Connection con = cp.getConnection();
-        PreparedStatement ps = null;
-        String sql = "Update user SET active = 1 WHERE email = ?";
 
-        boolean activated;
-
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, user.getEmail());
-            activated = ps.executeUpdate() != 0;
-        } finally {
-            DBUtil.closePreparedStatement(ps);
-            cp.freeConnection(con);
-        }
-
-        return activated;
-    }
-
-    public boolean deactivate(User user) throws Exception {
-        ConnectionPool cp = ConnectionPool.getInstance();
-        Connection con = cp.getConnection();
-        PreparedStatement ps = null;
-        String sql = "Update user SET active = 0 WHERE email = ?";
-
-        boolean deactivated;
-
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, user.getEmail());
-            deactivated = ps.executeUpdate() != 0;
-        } finally {
-            DBUtil.closePreparedStatement(ps);
-            cp.freeConnection(con);
-        }
-
-        return deactivated;
-    }
 }

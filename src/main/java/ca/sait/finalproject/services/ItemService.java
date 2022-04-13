@@ -47,7 +47,6 @@ public class ItemService {
     }
 
     public boolean delete(int id) throws Exception {
-
         Item item = new Item();
         item.setId(id);
         return this.itemDB.delete(item);
