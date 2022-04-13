@@ -108,17 +108,12 @@ public class CategoryServlet extends HttpServlet {
             }
         } else if (action != null && action.equals("edit")) {
             try {
-//                String idParam = request.getParameter("id");
-//                int id = Integer.parseInt(idParam);
-//                String category = request.getParameter("category");
-//
-//                int categoryNum = Integer.parseInt(category);
-//
-//                String name = request.getParameter("name");
-//                String priceIn = request.getParameter("price");
-//                double price = Double.parseDouble(priceIn);
-//                itemService.update(id, categoryNum, name, price, email);
-//                //this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+                String idParam = request.getParameter("id");
+                int id = Integer.parseInt(idParam);
+                String category = request.getParameter("name");
+
+                catService.update(id, category);
+                //this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println(ex);
