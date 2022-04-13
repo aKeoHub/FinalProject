@@ -9,8 +9,10 @@
     <body>
         <h1>Welcome ${email}</h1>
         <h2>Admin Functionality...</h2>
-        <h3>Reactivate a user </h3>
 
+            <p>
+                <a href="categories">View Categories</a>
+            </p>
         <table class="table">
             <thead>
                 <tr>
