@@ -132,8 +132,8 @@ public class UserDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        //String sql = "DELETE FROM user WHERE email = ?";
-        String sql = "Update user SET active = 0 WHERE email = ?";
+        String sql = "DELETE FROM user WHERE email = ?";
+        //String sql = "Update user SET active = 0 WHERE email = ?";
 
         boolean deleted;
 
@@ -167,6 +167,26 @@ public class UserDB {
         }
 
         return activated;
+    }
+    
+        public boolean deactivate(User user) throws Exception {
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection();
+        PreparedStatement ps = null;
+        String sql = "Update user SET active = 0 WHERE email = ?";
+
+        boolean deactivated;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, user.getEmail());
+            deactivated = ps.executeUpdate() != 0;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            cp.freeConnection(con);
+        }
+
+        return deactivated;
     }
 
 }

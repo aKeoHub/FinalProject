@@ -64,10 +64,10 @@ public class AccountServlet extends HttpServlet {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println(ex);
             }
-        } else if (action != null && action.equals("delete")) {
+        } else if (action != null && action.equals("deactivate")) {
             try {
                 String email = request.getParameter("email");
-                service.delete(email);
+                service.deactivate(email);
 
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);

@@ -34,7 +34,7 @@
         </form>
         
         <form action="account" method="post">
-            <input type="hidden" name="action" value="delete" />
+            <input type="hidden" name="action" value="deactivate" />
             <input type="submit" value="DEACTIVATE">
             <input type="hidden" name="email" value="${user.email}">
         </form>

@@ -69,7 +69,15 @@ public class UserServlet extends HttpServlet {
         ItemService itemService = new ItemService();
         String email = (String) session.getAttribute("email");
 
+        try {
+            List<Item> items = itemService.getAll(email);
 
+            request.setAttribute("items", items);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
         if (action != null && action.equals("add")) {
             try {
 
@@ -81,6 +89,7 @@ public class UserServlet extends HttpServlet {
 
                 itemService.insert(categoryNum, name, price, email);
                 // itemService.insert(category, name, price, email);
+               // this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println(ex);
@@ -91,6 +100,7 @@ public class UserServlet extends HttpServlet {
                 String idParam = request.getParameter("id");
                 int id = Integer.parseInt(idParam);
                 itemService.delete(id);
+                //this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println(ex);
@@ -100,31 +110,20 @@ public class UserServlet extends HttpServlet {
                 String idParam = request.getParameter("id");
                 int id = Integer.parseInt(idParam);
                 String category = request.getParameter("category");
-                
+
                 int categoryNum = Integer.parseInt(category);
-                String test = "TEST";
-                request.setAttribute("test", test);
-                
+
                 String name = request.getParameter("name");
                 String priceIn = request.getParameter("price");
                 double price = Double.parseDouble(priceIn);
                 itemService.update(id, categoryNum, name, price, email);
+                //this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println(ex);
             }
-        
-                try {
-            List<Item> items = itemService.getAll(email);
 
-            request.setAttribute("items", items);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println(ex);
         }
 
-       // getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
-    }
     }
 }
