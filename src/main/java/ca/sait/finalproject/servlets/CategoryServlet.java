@@ -1,12 +1,21 @@
 
 package ca.sait.finalproject.servlets;
 
+import ca.sait.finalproject.models.Category;
+import ca.sait.finalproject.models.Item;
+import ca.sait.finalproject.services.ItemService;
+import ca.sait.finalproject.services.UserService;
+import ca.sait.finalproject.services.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -27,6 +36,22 @@ public class CategoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+              CategoryService catService = new CategoryService(); 
+        HttpSession session = request.getSession();
+        ItemService itemService = new ItemService();
+        
+        String email = (String) session.getAttribute("email");
+
+        try {
+            List<Category> categories = catService.getAll();
+
+            request.setAttribute("categories", categories);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/category.jsp").forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+        this.getServletContext().getRequestDispatcher("/WEB-INF/category.jsp").forward(request, response);
     }
 
     /**
@@ -40,6 +65,71 @@ public class CategoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+                String action = request.getParameter("action");
+        UserService service = new UserService();
+        CategoryService catService = new CategoryService(); 
+        HttpSession session = request.getSession();
+        ItemService itemService = new ItemService();
+        
+        String email = (String) session.getAttribute("email");
+
+        try {
+            List<Category> categories = catService.getAll();
+
+            request.setAttribute("categories", categories);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/category.jsp").forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+//        if (action != null && action.equals("add")) {
+//            try {
+//
+//                String category = request.getParameter("category");
+//                int categoryNum = Integer.parseInt(category);
+//                String name = request.getParameter("name");
+//                String priceIn = request.getParameter("price");
+//                double price = Double.parseDouble(priceIn);
+//
+//                itemService.insert(categoryNum, name, price, email);
+//                // itemService.insert(category, name, price, email);
+//               // this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+//            } catch (Exception ex) {
+//                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+//                System.out.println(ex);
+//            }
+//
+//        } else if (action != null && action.equals("delete")) {
+//            try {
+//                String idParam = request.getParameter("id");
+//                int id = Integer.parseInt(idParam);
+//                itemService.delete(id);
+//                //this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+//            } catch (Exception ex) {
+//                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+//                System.out.println(ex);
+//            }
+//        } else if (action != null && action.equals("edit")) {
+//            try {
+//                String idParam = request.getParameter("id");
+//                int id = Integer.parseInt(idParam);
+//                String category = request.getParameter("category");
+//
+//                int categoryNum = Integer.parseInt(category);
+//
+//                String name = request.getParameter("name");
+//                String priceIn = request.getParameter("price");
+//                double price = Double.parseDouble(priceIn);
+//                itemService.update(id, categoryNum, name, price, email);
+//                //this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+//            } catch (Exception ex) {
+//                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+//                System.out.println(ex);
+//            }
+//
+//        }
+        this.getServletContext().getRequestDispatcher("/WEB-INF/category.jsp").forward(request, response);
     }
 
 

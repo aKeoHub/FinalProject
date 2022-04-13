@@ -11,7 +11,7 @@
         <h2>Admin Functionality...</h2>
 
             <p>
-                <a href="categories">View Categories</a>
+                <a href="category">View Categories</a>
             </p>
         <table class="table">
             <thead>
