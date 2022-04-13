@@ -69,15 +69,6 @@ public class UserServlet extends HttpServlet {
         ItemService itemService = new ItemService();
         String email = (String) session.getAttribute("email");
 
-        try {
-            List<Item> items = itemService.getAll(email);
-
-            request.setAttribute("items", items);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println(ex);
-        }
         if (action != null && action.equals("add")) {
             try {
 
@@ -89,7 +80,7 @@ public class UserServlet extends HttpServlet {
 
                 itemService.insert(categoryNum, name, price, email);
                 // itemService.insert(category, name, price, email);
-               // this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+                // this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println(ex);
@@ -123,6 +114,16 @@ public class UserServlet extends HttpServlet {
                 System.out.println(ex);
             }
 
+        }
+
+        try {
+            List<Item> items = itemService.getAll(email);
+
+            request.setAttribute("items", items);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
 
     }

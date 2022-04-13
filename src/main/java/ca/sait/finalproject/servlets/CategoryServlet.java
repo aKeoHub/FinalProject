@@ -71,15 +71,7 @@ public class CategoryServlet extends HttpServlet {
 
         String email = (String) session.getAttribute("email");
 
-        try {
-            List<Category> categories = catService.getAll();
 
-            request.setAttribute("categories", categories);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/category.jsp").forward(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println(ex);
-        }
         if (action != null && action.equals("add")) {
             try {
 
@@ -120,7 +112,19 @@ public class CategoryServlet extends HttpServlet {
             }
 
         }
-        this.getServletContext().getRequestDispatcher("/WEB-INF/category.jsp").forward(request, response);
+        
+                try {
+            List<Category> categories = catService.getAll();
+
+            request.setAttribute("categories", categories);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/category.jsp").forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+
     }
+    
+    
 
 }

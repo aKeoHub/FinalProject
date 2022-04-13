@@ -41,7 +41,7 @@
                 </c:forEach>
             </tbody>
         </table>
-
+        <h2>Add Item</h2>
         <form action="user" method="post">
             <input type="hidden" name="action" value="add">
 
@@ -71,7 +71,7 @@
 
         <br>
 
-
+        <h2>Edit Item</h2>
         <form action="user" method="post">
             <input type="hidden" name="action" value="edit">
 
