@@ -40,13 +40,19 @@ public class ItemService {
         return this.itemDB.update(item);
     }
     
-    public boolean delete(int id) throws Exception {
+    public boolean deleteAll(String email) throws Exception {
+        
+        Item item = new Item();
+        item.setEmail(email);
+        return this.itemDB.deleteAll(email);
+    }
+
+        public boolean delete(int id) throws Exception {
         
         Item item = new Item();
         item.setId(id);
         return this.itemDB.delete(item);
     }
-
 
     
 

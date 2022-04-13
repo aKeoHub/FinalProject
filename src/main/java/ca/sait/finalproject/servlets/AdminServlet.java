@@ -3,6 +3,7 @@ package ca.sait.finalproject.servlets;
 import ca.sait.finalproject.dataaccess.UserDB;
 import ca.sait.finalproject.models.Role;
 import ca.sait.finalproject.models.User;
+import ca.sait.finalproject.services.ItemService;
 import ca.sait.finalproject.services.RoleService;
 import ca.sait.finalproject.services.UserService;
 import java.io.IOException;
@@ -61,6 +62,7 @@ public class AdminServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         UserService service = new UserService();
+        ItemService itemService = new ItemService();
         int roleId;
 
         if (action != null && action.equals("add")) {
@@ -91,7 +93,10 @@ public class AdminServlet extends HttpServlet {
 
             try {
                 String email = request.getParameter("email");
+                itemService.deleteAll(email);
                 service.delete(email);
+               
+                
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println(ex);

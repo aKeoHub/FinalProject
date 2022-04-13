@@ -150,4 +150,25 @@ public class ItemDB {
 
         return deleted;
     }
+    
+        public boolean deleteAll(String email) throws Exception {
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection();
+        PreparedStatement ps = null;
+        String sql = "DELETE FROM item WHERE owner = ?";
+
+
+        boolean deletedAll;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            deletedAll = ps.executeUpdate() != 0;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            cp.freeConnection(con);
+        }
+
+        return deletedAll;
+    }
 }
